@@ -1,0 +1,27 @@
+<div class="app-todo-list">
+  <h4>Task Manager</h4>
+<form [formGroup]="form">
+<div class="add-task-ap task-list">
+  <input type="text" id="input-text" value="" formControlName="newTask">
+  <button type="button" class="btn btn-primary" (click)="addTask($event)">Add</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span class="filter"><label>Filter</label></span>
+  <select (change)="filterTasks($event)">
+    <option [selected]="'All'" *ngFor="let option of filterOptions"  [value]="option.id">{{option.id}}</option>
+  </select>
+</div>
+<div class="card-container">
+  <div *ngFor="let task of tasks.tasks" class="card">
+    <div class="item-area">
+      <a><label [ngClass]="(task.status === 'Completed') ? 'strike-out-task' : 'none'"> {{task.task}}</label></a>
+    </div>
+    <div class="item-area">
+      <button type="button" class="btn btn-link" [disabled]="task.status === 'Completed'" (click)="completeTask(task)">Complete</button>
+    </div>
+    <div class="item-area">
+      <button type="button" class="btn btn-link" (click)="deleteTask(task)">Delete</button>
+    </div>
+  </div>
+</div>
+</form>
+</div>
